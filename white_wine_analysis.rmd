@@ -54,6 +54,8 @@ be long-tailed.
     
 It seems, residual sugar, chlorides, density have extreme outliers.
 
+Lets take a closer look at each of the variables below.
+
 
 ### Quality
 ```{r echo=FALSE, message=FALSE, warning=FALSE, Quality}
@@ -323,14 +325,14 @@ grid.arrange(first, revised)
   
   My dataset is related to the quality of white wine. The dataset is already tidy
   with observation mentioning the chemical physicochemical of the wine. 
-  There are 4898 observations of 13 
-  variables. The variable 'quality' is based on the median rating by 3 wind experts. 
+  There are 4898 observations of 13 variables. 
+  The variable 'quality' is based on the median rating by 3 wine experts. 
   The other physicochemical  variables are fixed.acidity, volatile.acidity, 
   citric.acid, residual.sugar, chlorides, free.sulfur.dioxide, total.sulfur.dioxide, 
   density, pH, sulphates and alcohol. 
   
   The quality variable can be seen as factor variable with 0 to 10 
-  i.e. 11 possible levels, where 6 levels are present in dataset i.e . 3-8.
+  i.e. 11 possible levels, where only 7 levels are present in dataset i.e . 3-9.
   
   It's important to note that only physicochemical variables are available, 
   there is no data on other variables  such as grape type, wine brand, wine 
@@ -340,13 +342,6 @@ grid.arrange(first, revised)
   I'm interested to see if any of the variables produce consistently good, or 
   bad white wine.
   
-### What other features in the dataset do you think will help support your \
-  investigation into your feature(s) of interest?
-  
-  As stated above, only physicochemical data is available - Color, flavor, aroma 
-  of wine can signficantly affect the perception of quality. 
-  Therefore, having those features in this dataset would have helped performing 
-  better analysis.
 
 ### Did you create any new variables from existing variables in the dataset?
 Binned values in the quality column, providing me with a range of bad, average 
@@ -368,7 +363,7 @@ corrplot(cor(wine_data), method="number")
 
 Key factors that seem to have correlation with quality of wine are density and alcohol.
 
-I'm also going to peak at the corolations between density and residual sugar and
+I'm also going to examine the corolations between density and residual sugar and
 the relationship between sulfur dioxides.
 
 pH is also negatively corrolated with fixed acidity, I feel like this is obvious
@@ -379,6 +374,7 @@ Lets look at the two highest correlating variables with density.
 It looks like density is correlated negatively alcohol, and positively with residual 
 sugar amounts.  I think intuitively this should be correct as more sugar would result 
 in an increase in density, and vice versa for alcohol amounts.
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE, density}
 
 
@@ -410,7 +406,8 @@ wine %>% group_by(citric.acid == 0.49) %>%
 
 ```
 
-Hmm, perhaps not worth investigating this.
+Hmm, perhaps not worth investigating this as there is no noticeable increase
+in quality.
 
 ## Volatile Acidity
 
@@ -609,7 +606,7 @@ percentage.
     xlab("Wine Rating") +
     ylab("Number of Wines")
 
-  grid.arrange(p1, p2, ncol= 2, top=textGrob("Distribution of Wines",gp=gpar(fontsize=20,font=2)))
+  grid.arrange(p1, p2, ncol= 2, top=textGrob("Distribution of Wine Quality",gp=gpar(fontsize=20,font=2)))
 
 ```
 
