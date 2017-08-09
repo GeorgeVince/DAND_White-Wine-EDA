@@ -15,6 +15,15 @@ library(RColorBrewer)
 
 ```
 
+# Introduction
+This is my brief analysis into the physicochemical properties of white wine, and 
+the influences it causes on the quality of the wine.
+A number of correlations and causes have been analysed and summarised at the end of 
+each report section.
+Firstly I explored each variable and the distribution within in the dataset, before
+beginning univariate and bivariate analysis.
+
+
 # Structure of data
 ```{r echo=TRUE}
 wine = read.csv("wineQualityWhites.csv")
@@ -61,8 +70,8 @@ Lets take a closer look at each of the variables below.
 ```{r echo=FALSE, message=FALSE, warning=FALSE, Quality}
   
   ggplot(wine, aes(quality)) + 
-  geom_histogram() +
-  scale_x_continuous( limit = c(3,9), breaks = seq(3, 9, by = 1) ) +
+  geom_histogram(binwidth = 1) +
+  scale_x_continuous(limit = c(2,10), breaks = seq(3, 9, by = 1)) +
   ggtitle('Quality Counts') 
   
     
@@ -324,7 +333,7 @@ grid.arrange(first, revised)
 ### What is the structure of your dataset?
   
   My dataset is related to the quality of white wine. The dataset is already tidy
-  with observation mentioning the chemical physicochemical of the wine. 
+  with observation mentioning the physicochemical properties of the wine. 
   There are 4898 observations of 13 variables. 
   The variable 'quality' is based on the median rating by 3 wine experts. 
   The other physicochemical  variables are fixed.acidity, volatile.acidity, 
@@ -649,7 +658,7 @@ ggplot(subset(wine, rating != "average"), aes(alcohol, volatile.acidity, color =
   geom_point() +
   ggtitle("Alcohol vs Volatile Acidity") +
   xlab('Alcohol Level (% by Volume)') +
-  ylab('Volatile Acidity') 
+  ylab('Volatile Acidity (g / dm^3)') 
 
 ```
 
@@ -673,6 +682,33 @@ making it difficult to produce a representative analysis.
 Findings from this analysis can only be generalised to the Portuguese "Vinho Verde" 
 wine, it's very likely that different types of white wine will have varyingly
 different factors that conttribute towards quality.
+
+In terms of future work, two ideas spring to mind.  A data set is also available
+for the red version if the Vinho Verde wine, it would be interesting to explore the 
+factors that cause success is red wine and perhaps compare these findings to results 
+found from this report.  It may also be worth trying to find a dataset that contains
+other factors, such as price and grape type as I have a feeling there are a number of
+other factors that make up the quality of a wine.
+
+A second idea I had is performing some research into machine learning, for example -
+given a set of wine properties, can we accurately predict the quality of wine?
+I'm sure I'm going to cover this on my next module - "Introduction to Machine Learning"!
+
+During the project I encountered a number of issues; firstly with not being familar 
+with the R programming language, lots of knowledge was obtained from Stackoverflow 
+and various pages of the R documentation.
+Having the dataset already in a tidy format saved lots of hours wrangling, I think
+for more of a challenge next time I will source a dataset that encourages more data
+maniuplation and wragling before analysis can begin.
+
+A second issue that cropped up was that there was not a very strong correlation
+between wine quality and one single variable - rather it was the combination of variables
+that caused an increase in wine quality.  By exploring alcohol and acidity levels together
+I managed to find out a combination of variables that have an impact on wine
+quality.
+
+
+
 
 # References
 https://s3.amazonaws.com/udacity-hosted-downloads/ud651/wineQualityInfo.txt
